@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+// ignore: unused_import
 import 'screens/cart/cart_page.dart';
-
-
+// import 'screens/favorite/favorite_page.dart';
 
 void main() {
   runApp(const MyApp());

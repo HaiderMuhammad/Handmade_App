@@ -1,6 +1,6 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+
 import 'package:front/models/product.dart';
 import 'package:front/screens/cart/components/cart_item_card.dart';
 
@@ -15,68 +15,75 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
       child: ListView.builder(
-        itemCount: Product.products.length,
-        itemBuilder: (BuildContext context, int index) => Padding(
-          padding: const EdgeInsets.symmetric(vertical: 1),
-          child: Dismissible(
-            key: Key(
-              Product.products[index].id.toString(),
-            ),
-            direction: DismissDirection.endToStart,
-            background: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                color: const Color(0xffcf3643,).withOpacity(0.45),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
-                    Icon(Icons.delete, color: Colors.white),     
-                  ],
+          itemCount: Product.products.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 1),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(4.0),
+                child: Slidable(
+                  key: Key(
+                    Product.products[index].id.toString(),
+                  ),
+                  startActionPane: ActionPane(
+                    motion: const ScrollMotion(),
+                    dismissible: DismissiblePane(onDismissed: () {}),
+                    children: [
+                      SlidableAction(
+                        onPressed: ((context) {
+                          setState(() {});
+                        }),
+                        icon: Icons.favorite,
+                        backgroundColor: Colors.blueAccent,
+                        foregroundColor: Colors.white,
+                        label: 'Add to favorite',
+                      )
+                    ],
+                  ),
+                  endActionPane: ActionPane(
+                    motion: const ScrollMotion(),
+                    dismissible: DismissiblePane(onDismissed: () { 
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          behavior: SnackBarBehavior.floating,
+                          content: Text(
+                              '${Product.products[index].productName} dismissed'),
+                        ),
+                      );
+                      setState(() {
+                        Product.products.removeAt(index);
+                      });
+                    }),
+                    children: [
+                      SlidableAction(
+                        onPressed: ((context) {
+                          setState(() {
+                            Product.products.removeAt(index);
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              content: Text(
+                                  '${Product.products[index].productName} dismissed'),
+                            ),
+                          );
+                        }),
+                        icon: Icons.delete,
+                        backgroundColor: const Color(0xFFFE4A49),
+                        foregroundColor: Colors.white,
+                        label: 'Delete',
+                      )
+                    ],
+                  ),
+                  child: CartItemCard(
+                    product: Product.products[index],
+                  ),
                 ),
               ),
-            ),
-            confirmDismiss: (DismissDirection direction) async {
-              return await showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('Delete Confirmation'),
-                    content: const Text(
-                        'Are you sure you want to delete this item?'),
-                    actions: [
-                      FlatButton(
-                          onPressed: () => Navigator.of(context).pop(true),
-                          child: const Text('Delete')),
-                      FlatButton(
-                        onPressed: () => Navigator.of(context).pop(false),
-                        child: const Text('Cancel'),
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-            onDismissed: (DismissDirection direction) {
-              if (direction == DismissDirection.startToEnd) {
-                print('Add to favorite');
-              } else {
-                print('Remove item');
-              }
-              setState(() {
-                Product.products.removeAt(index);
-              });
-            },
-            child: CartItemCard(
-              product: Product.products[index],
-            ),
-          ),
-        ),
-      ),
+            );
+          }),
     );
   }
 }

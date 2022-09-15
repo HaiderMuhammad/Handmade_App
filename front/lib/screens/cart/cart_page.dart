@@ -17,8 +17,8 @@ class CartPage extends StatelessWidget {
   }
   AppBar buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
+      backgroundColor: Colors.white,
+      elevation: 1,
       leading: IconButton(
         onPressed: () {},
         icon: const Icon(
