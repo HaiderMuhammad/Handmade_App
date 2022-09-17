@@ -63,8 +63,10 @@ class _BodyState extends State<Body> {
                       label: 'Remove from favorite',
                     ),
                   ],
-                ), 
-                child: FavoriteCard(product: Product.products[index],),
+                ),
+                child: FavoriteCard(
+                  product: Product.products[index],
+                ),
               ),
             ),
           );
