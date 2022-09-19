@@ -1,15 +1,13 @@
-class Account{
+class UserAccount{
   final int id;
-  final String name;
   final String email;
   final String token;
 
-  Account({
+  UserAccount({
     required this.id,
-    required this.name,
     required this.email,
     required this.token,
   });
 
-  static late Account currentAccount;
+  static late UserAccount currentAccount;
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ProfileField extends StatelessWidget {
+class ContainerField extends StatelessWidget {
   final String text;
   final String hint;
-  const ProfileField({
+  const ContainerField({
     Key? key, required this.text, required this.hint,
   }) : super(key: key);
 

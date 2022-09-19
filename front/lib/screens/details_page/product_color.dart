@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front/models/product.dart';
 
 class ProductColors extends StatelessWidget {
   const ProductColors({
@@ -21,22 +22,16 @@ class ProductColors extends StatelessWidget {
         ),
         Row(
           children: [
-        Container(
-        height: 45,
-        width: 75,
-        margin: const EdgeInsets.only(top: 10, bottom: 25, right: 10),
-        decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Colors.cyan
-        ),
-        ),
+            ContainerColor(
+              color: Product.productColor,
+            ),
             Container(
               height: 45,
               width: 75,
               margin: const EdgeInsets.only(top: 10, bottom: 25, right: 10),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: Colors.black
+                  color: Product.productColor.first
               ),
             ),
             Container(
@@ -61,6 +56,27 @@ class ProductColors extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+}
+
+class ContainerColor extends StatelessWidget {
+  const ContainerColor({
+    Key? key, required this.color,
+  }) : super(key: key);
+
+  final List<Color> color;
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+    height: 45,
+    width: 75,
+    margin: const EdgeInsets.only(top: 10, bottom: 25, right: 10),
+    decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(8),
+    color: color.last
+      ),
     );
   }
 }

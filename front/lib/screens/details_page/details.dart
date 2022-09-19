@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:front/models/Favorite.dart';
 import 'package:front/screens/details_page/product_color.dart';
 import 'package:front/screens/details_page/product_description.dart';
 import 'package:front/screens/details_page/product_image.dart';
 import 'package:front/screens/details_page/product_name.dart';
 import 'package:front/screens/details_page/product_price.dart';
+import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import 'add_button.dart';
 
 
 class DetailsPage extends StatelessWidget {
-  const DetailsPage({Key? key, required this.productName, required this.oldPrice, required this.newPrice, required this.image, required this.description}) : super(key: key);
+  DetailsPage({Key? key, required this.productName, required this.oldPrice, required this.newPrice, required this.image, required this.description}) : super(key: key);
 
   final String productName;
   final String oldPrice;
@@ -19,6 +22,7 @@ class DetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final RxBool isLike = true.obs;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -43,9 +47,32 @@ class DetailsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
 
-                ProductName(name: productName,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ProductName(name: productName,),
+                      Obx(() {
+                          return IconButton(
+                            onPressed: (){
+                              isLike.value = ! isLike.value;
+                              if(isLike.isFalse){
+                                Favorite.add(productName, newPrice, image);
+                              }
+                            },
+                            icon: isLike.value
+                              ? const Icon(Icons.favorite_border_rounded)
+                              : const Icon(Icons.favorite),
+                            color: isLike.value ? Colors.black : Colors.redAccent,
+                          );
+                        }
+                      ),
+                    ],
+                  ),
+                ),
 
-                ProductPrice(price: oldPrice,),
+                ProductPrice(price: newPrice,),
 
                 const SizedBox(height: 10,),
                 const Divider(height: 3, color: Colors.grey,),

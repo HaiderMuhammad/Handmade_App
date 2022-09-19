@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:front/models/account/facebook_login.dart';
+import 'package:front/navBar.dart';
 import 'package:front/register/login_page.dart';
 import 'package:front/services/local_database/shared_preferences.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 Future<void> main() async{
 
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         ),
         ),
       ),
-      home: LoginPage(),
+      home: NavBar(),
     );
   }
 }

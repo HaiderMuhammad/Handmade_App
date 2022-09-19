@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:front/nav_bar_controller.dart';
+import 'package:front/screens/cart_page/cart_page.dart';
 import 'package:front/screens/home_page/home.dart';
 import 'package:front/screens/profile/profile_page.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:get/get.dart';
+
+import 'screens/wishlist_page/wishlist_page.dart';
 
 class NavBar extends StatelessWidget {
   NavBarController navBarController = Get.put(NavBarController());
@@ -12,8 +15,8 @@ class NavBar extends StatelessWidget {
 
   final screens = [
     const HomePage(),
-    const HomePage(),
-    const HomePage(),
+    const FavoritePage(),
+    const CartPage(),
     Profile(),
   ];
 
@@ -47,7 +50,7 @@ class NavBar extends StatelessWidget {
               /// Likes
               SalomonBottomBarItem(
                 icon: const Icon(Icons.favorite_border),
-                title: const Text("Favourite"),
+                title: const Text("Wishlist"),
                 selectedColor: const Color(0xff67C4A7),
               ),
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class AddButton extends StatelessWidget {
   const AddButton({
     Key? key,
@@ -11,7 +12,6 @@ class AddButton extends StatelessWidget {
         padding: const EdgeInsets.only(left: 10, right: 10, top: 40),
         child: MaterialButton(
           onPressed: () {
-
           },
           height: 55,
           minWidth: double.infinity,
@@ -26,7 +26,7 @@ class AddButton extends StatelessWidget {
                   fontSize: 20
               )
           ),
-        )
+        ),
     );
   }
 }

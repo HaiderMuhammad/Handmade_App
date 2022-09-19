@@ -26,9 +26,7 @@ class ProductView extends StatelessWidget {
               oldPrice: oldPrice,
               newPrice: newPrice,
               image: image,
-              description: description,
-            )
-            )
+              description: description,))
         );
       },
       child: Container(

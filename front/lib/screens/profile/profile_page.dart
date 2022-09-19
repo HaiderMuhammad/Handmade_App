@@ -53,12 +53,12 @@ class _ProfileState extends State<Profile> {
                   ],
                 )
             ),
-            const ProfileField(text: 'First Name', hint: 'first name',),
-            const ProfileField(text: 'Last Name', hint: 'last name',),
-            const ProfileField(text: 'Email', hint: 'Email',),
-            const ProfileField(text: 'Phone Number', hint: 'phone number',),
-            const ProfileField(text: 'Address', hint: 'address',),
-            const ProfileField(text: 'Password', hint: 'password',),
+            const ContainerField(text: 'First Name', hint: 'first name',),
+            const ContainerField(text: 'Last Name', hint: 'last name',),
+            const ContainerField(text: 'Email', hint: 'Email',),
+            const ContainerField(text: 'Phone Number', hint: 'phone number',),
+            const ContainerField(text: 'Address', hint: 'address',),
+            const ContainerField(text: 'Password', hint: 'password',),
 
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),

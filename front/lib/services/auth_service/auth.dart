@@ -1,17 +1,17 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:front/models/account/signInModel.dart';
+import 'package:front/models/account/signUpModel.dart';
 import 'package:front/navBar.dart';
-import 'package:front/register/login_page.dart';
 import 'package:front/services/local_database/shared_preferences.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:dio/dio.dart';
-import 'package:front/models/account/model.dart';
-import 'google_login.dart';
 
 
 class AuthService{
   static RxBool isLoading = false.obs;
 
-  static Future<Account?> signIn({required String email, required String password}) async{
+  static Future<UserAccount?> signIn({required String email, required String password}) async{
     isLoading.value = true;
    try{
      Response res = await Dio().post(
@@ -22,16 +22,14 @@ class AuthService{
          })
      );
      Map data = res.data['data'];
-     Account account = Account(
+     UserAccount account = UserAccount(
          id: data['Id'],
-         name: data['Name'],
          email: data['Email'],
          token: data['Token']
      );
-
      Database.prefs.setString('email', email);
      Database.prefs.setString('password', password);
-     Account.currentAccount = account;
+     UserAccount.currentAccount = account;
      Get.offAll( NavBar());
    }
    catch (e){
@@ -42,9 +40,40 @@ class AuthService{
    // print(Map.from(res.data));
   }
 
+  static Future<NewUserAccount?> signUp(
+      {required String name, required String email, required String password}) async{
+    isLoading.value = true;
+    try{
+      Response response = await Dio().post(
+          'http://restapi.adequateshop.com/api/authaccount/registration',
+          data: jsonEncode({
+            'name': name,
+            'email': email,
+            'password': password
+          })
+      );
+      print(response);
+      Map data = response.data['data'];
+      NewUserAccount newAccount = NewUserAccount(
+        id: data['Id'],
+        name: data['Name'],
+        email: data['Email'],
+        token: data['Token'],
+      );
 
+      Database.prefs.setString('name', name);
+      Database.prefs.setString('email', email);
+      Database.prefs.setString('password', password);
+      Database.prefs.setString('token', newAccount.token);
+      NewUserAccount.currentAccount = newAccount;
 
-  static signOut(){
-    Get.offAll(LoginPage);
+      Get.offAll( NavBar());
+    }
+    catch (e){
+      debugPrint('error $e');
+    }
+    isLoading.value = false;
+    return null;
+    // print(Map.from(res.data));
   }
 }

@@ -38,9 +38,10 @@ dependencies:
   salomon_bottom_bar: ^3.3.1
   dio: ^4.0.6
   get: any
-  google_sign_in: ^5.4.1
   shared_preferences: ^2.0.15
-  like_button: ^2.0.4
+  flutter_slidable: ^2.0.0
+  flutter_facebook_auth: any
+  image_picker: ^0.8.5+3
 
 dev_dependencies:
   flutter_test:

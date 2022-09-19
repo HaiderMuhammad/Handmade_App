@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front/register/email_field.dart';
 import 'package:front/register/password_field.dart';
+import 'package:front/register/signUp_page.dart';
 import 'package:front/services/auth_service/auth.dart';
 import 'package:get/get.dart' hide Response;
 
@@ -8,8 +9,6 @@ import 'package:get/get.dart' hide Response;
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
   final GlobalKey<FormState> _formKey = GlobalKey();
-  final TextEditingController emailCont = TextEditingController();
-  final TextEditingController passwordCont = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +32,8 @@ class LoginPage extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: Colors.black),
                   ),
                 ),
-                EmailField(hint: 'Email', onChanged: (x) => email= x ,),
-                PasswordField( hint: 'Password', onChanged: (x) => password= x, isSecure: true,),
+                EmailField(hint: 'Email', onChanged: (value) => email= value ,),
+                PasswordField( hint: 'Password', onChanged: (value) => password= value, isSecure: true,),
 
                 Padding(
                     padding: const EdgeInsets.only(left: 10, right: 10, top: 50),
@@ -83,7 +82,11 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                           TextButton(
-                              onPressed: (){},
+                              onPressed: (){
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder:(context) =>  SignUp())
+                                );
+                              },
                               child: const Text(
                                 'Sign up',
                                 style: TextStyle(
