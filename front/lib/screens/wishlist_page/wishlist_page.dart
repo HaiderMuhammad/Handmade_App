@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:front/screens/wishlist_page/components/body1.dart';
-import 'package:front/screens/wishlist_page/components/favorite_list.dart';
+import 'package:front/screens/wishlist_page/favorite_view.dart';
 
-import '../cart_page/components/body.dart';
 
 class FavoritePage extends StatelessWidget {
   const FavoritePage({Key? key}) : super(key: key);
@@ -13,7 +11,7 @@ class FavoritePage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 1,
+        elevation: 0,
         centerTitle: true,
         title: const Text(
           'Favorite',
@@ -24,7 +22,7 @@ class FavoritePage extends StatelessWidget {
           ),
         ),
       ),
-      body: FavorList(),
+      body: const FavoriteView(),
     );
   }
 }

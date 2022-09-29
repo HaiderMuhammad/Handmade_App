@@ -12,7 +12,20 @@ class Favorite{
     Favorite('Cotton T-shirt', '24,99', 'assets/images/tshirt.jpg')
   ].obs;
 
-  static add(String name, String price, String image){
+  static RxList<Favorite> cartList = <Favorite> [
+    Favorite('Cotton T-shirt', '24,99', 'assets/images/tshirt.jpg'),
+    Favorite('Cotton T-shirt', '24,99', 'assets/images/tshirt.jpg')
+  ].obs;
+
+  static addToFav(String name, String price, String image){
     favList.add(Favorite(name, price, image));
+  }
+
+  static add(String name, String price, String image){
+    cartList.add(Favorite(name, price, image));
+  }
+
+  static delCart(){
+
   }
 }

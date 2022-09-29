@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:front/register/email_field.dart';
 import 'package:front/register/password_field.dart';
 import 'package:front/register/signUp_page.dart';
+import 'package:front/screens/home_page/home.dart';
 import 'package:front/services/auth_service/auth.dart';
 import 'package:get/get.dart' hide Response;
+import 'package:http/http.dart';
 
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
   final GlobalKey<FormState> _formKey = GlobalKey();
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +42,8 @@ class LoginPage extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 10, right: 10, top: 50),
 
                     child: MaterialButton(
-                          onPressed: () async {
-                            await AuthService.signIn(
-                                email: email,
-                                password: password
-                            );
+                          onPressed: () {
+                            login(email, password);
 
                             if(_formKey.currentState!.validate()){
                               return;

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'components/body.dart';
-import 'components/check_out.dart';
+import 'package:front/screens/cart_page/cart_view.dart';
 
 
 class CartPage extends StatelessWidget {
@@ -10,15 +9,14 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar: const CheckOutCard(),
       appBar: buildAppBar(),
-      body: const Body(),
+      body: const CartView(),
     );
   }
   AppBar buildAppBar() {
     return AppBar(
       backgroundColor: Colors.white,
-      elevation: 1,
+      elevation: 0,
       centerTitle: true,
       title: const Text(
         'Your Cart',
@@ -31,3 +29,5 @@ class CartPage extends StatelessWidget {
     );
   }
 }
+
+

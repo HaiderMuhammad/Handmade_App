@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:front/register/email_field.dart';
+import 'package:front/screens/home_page/home.dart';
 import 'package:front/services/auth_service/auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,7 +15,8 @@ class SignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     String name = '';
     String email = '';
-    String password = '';
+    String password1 = '';
+    String password2 = '';
 
     return Scaffold(
       body: Padding(
@@ -37,23 +41,25 @@ class SignUp extends StatelessWidget {
 
               EmailField(hint: 'name', onChanged: (value) => name = value),
               EmailField(hint: 'email', onChanged: (value) => email = value),
-              EmailField(hint: 'password', onChanged: (value) => password = value),
+              EmailField(hint: 'password1', onChanged: (value) => password1 = value),
+              EmailField(hint: 'password2', onChanged: (value) => password2 = value),
 
               Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10, top: 50),
                   child: MaterialButton(
                     onPressed: () async{
 
-                      await AuthService.signUp(
-                        name: name,
-                        email: email,
-                        password: password
-
-                      );
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => LoginPage()),
+                      // await AuthService.signUp(
+                      //   name: name,
+                      //   email: email,
+                      //   password1: password1,
+                      //   password2: password2
+                      //
                       // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const HomePage()),
+                      );
                     },
                     height: 65,
                     minWidth: double.infinity,

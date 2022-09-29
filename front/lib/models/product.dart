@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 class Product{
-  final int? id;
+  final int id;
   final String productName;
-  final String oldPrice;
+  final String price;
   final String newPrice;
   final String image;
   final Rx<Color> color;
   final String description;
 
-  Product(this.id, this.productName, this.oldPrice, this.newPrice, this.image, this.description,)
+  Product(this.id, this.productName, this.price, this.newPrice, this.image, this.description,)
       :
         color = Colors.accents.elementAt(Random().nextInt(Colors.accents.length)).withOpacity(0.1).obs;
 

@@ -35,7 +35,7 @@ class FavoriteCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  product.oldPrice,
+                  product.price,
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,

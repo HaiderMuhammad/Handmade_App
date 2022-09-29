@@ -7,7 +7,9 @@ class SearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return
+
+      TextField(
       decoration: InputDecoration(
           hintText: 'Search here ...',
           hintStyle: const TextStyle(
