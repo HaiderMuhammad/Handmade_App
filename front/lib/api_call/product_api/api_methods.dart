@@ -6,13 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:front/network_model/all_carts.dart';
 import 'package:front/network_model/all_favorite.dart';
 import 'package:front/network_model/all_products.dart';
+import 'package:front/network_model/profile.dart';
 import 'package:http/http.dart' as http;
 
 
 
 class ApiServices {
-  String token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJleHAiOjE2Njk2NDMzNTgsInN1YiI6ImFjY2VzcyJ9.qIOX-M4aRKT1A4k-g682TXLbFzgYQS842SQPEYhcFo0';
-  Future<List<ProductsModel>?> getUsers() async {
+  String token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJleHAiOjE2Njk3NDU1MzIsInN1YiI6ImFjY2VzcyJ9.MWNn5LKWv14uj82xS3ql39xWxW2VHIP_oMRA4jx6rbU';
+  Future<List<ProductsModel>?> getProducts() async {
     try {
       debugPrint('this is body start');
       var url = Uri.parse('http://192.168.1.105:8000/api/products/all?per_page=12&page=1');
@@ -30,6 +31,33 @@ class ApiServices {
     } catch (e) {
       // debugPrint('this is body error');
       // debugPrint('this is body $e');
+
+      log(e.toString());
+    }
+    return null;
+  }
+
+  Future<List<ProfileModel>?> getProfile() async {
+    try {
+      debugPrint('this is Cart');
+      var url = Uri.parse('http://192.168.1.105:8000/api/auth/profile');
+      var response = await http.get(url, headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer $token',
+      });
+      var responseBody = jsonDecode(response.body)['data'];
+      debugPrint('${response.statusCode}');
+      debugPrint('$responseBody');
+
+      if (response.statusCode == 200) {
+        List<ProfileModel> model =
+        responseBody.map<ProfileModel>((product)=> ProfileModel.fromJson(product)).toList();
+        debugPrint('${model.length}');
+        return model;
+      }
+    } catch (e) {
+      debugPrint('this is body error');
+      debugPrint('this is body $e');
 
       log(e.toString());
     }
@@ -112,6 +140,27 @@ class ApiServices {
     }
   }
 
+  Future AddToFav(String idItem) async{
+    var headers = {
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer $token',
+    };
+    var request = http.Request('POST', Uri.parse('http://192.168.1.105:8000/api/wishlists/add?product_id='));
+    request.body = json.encode({
+      "product_id": idItem,
+    });
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    }
+    else {
+      print(response.reasonPhrase);
+    }
+  }
+
   IncreaseItem(idItem) async {
     http.Response response;
     try {
@@ -150,6 +199,24 @@ class ApiServices {
     http.Response response;
     try {
       var url = Uri.parse('http://192.168.1.105:8000/api/carts/item/delete/$idItem');
+      response = await http.delete(url,
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': 'Bearer $token',
+          }
+      );
+      getCart();
+      debugPrint("recode${response.statusCode}");
+
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  DeleteFavCart(idItem) async {
+    http.Response response;
+    try {
+      var url = Uri.parse('http://192.168.1.105:8000/api/wishlists/remove/$idItem');
       response = await http.delete(url,
           headers: {
             "Content-Type": "application/json",

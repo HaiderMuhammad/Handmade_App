@@ -22,7 +22,7 @@ class _FlashDealViewState extends State<FlashDealView> {
   }
 
   void _getData() async {
-    productModel = (await ApiServices().getUsers());
+    productModel = (await ApiServices().getProducts());
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
   @override
@@ -46,6 +46,7 @@ class _FlashDealViewState extends State<FlashDealView> {
                             productName: productModel![index].name.toString(),
                             price: productModel![index].price.toString(),
                             description: productModel![index].description.toString(),
+                            image: "http://192.168.1.105:8000${productModel![index].image![0].image}",
                           )
                       )
                   );

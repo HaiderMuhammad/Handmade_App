@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:front/screens/wishlist_page/favorite_view.dart';
+
+import 'favorite_view.dart';
 
 
 class FavoritePage extends StatelessWidget {

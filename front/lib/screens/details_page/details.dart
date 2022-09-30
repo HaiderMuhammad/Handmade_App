@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:front/api_call/product_api/api_methods.dart';
 import 'package:front/screens/details_page/product_color.dart';
+import 'package:get/get.dart';
 
 
 class DetailsPage extends StatelessWidget {
-  DetailsPage({Key? key, required this.price, required this.description, required this.productName, required this.id}) : super(key: key);
+  DetailsPage({Key? key, required this.price, required this.description, required this.productName, required this.id, required this.image}) : super(key: key);
 
   ApiServices api = ApiServices();
   final String id;
   final String productName;
   final String price;
   final String description;
+  final String image;
+
+  final RxBool _isLike = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +27,11 @@ class DetailsPage extends StatelessWidget {
         ),
         body: Column(
             children: [
-              Container(
+              SizedBox(
                 width: double.infinity,
                 height: 250,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/tshirt.jpg'),
-                        fit: BoxFit.fitWidth
-                    )
+                child: Image.network(image,
+                  fit: BoxFit.fitWidth,
                 ),
               ),
               Padding(
@@ -38,14 +39,33 @@ class DetailsPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      productName,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.normal,
-                          fontSize: 15,
-                          color: Colors.black87,
-                          height: 2.5
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          productName,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: 15,
+                              color: Colors.black87,
+                              height: 2.5
+                          ),
+                        ),
+
+                    Obx((){
+                      return IconButton(
+                        padding: const EdgeInsets.only(top: 20),
+                        color: _isLike.value ? Colors.redAccent
+                            : Colors.grey,
+                        icon: const Icon(Icons.favorite_rounded, size: 25,),
+                        onPressed: (){
+                          _isLike.value = !_isLike.value;
+                          api.AddToFav(id);
+                        },
+                      );
+                    }
+                    ),
+                      ],
                     ),
                   Text(
                     price,

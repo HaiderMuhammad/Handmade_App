@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front/models/product.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField({
@@ -10,6 +11,7 @@ class SearchField extends StatelessWidget {
     return
 
       TextField(
+        onChanged: ((value) => Product.filterList(value)),
       decoration: InputDecoration(
           hintText: 'Search here ...',
           hintStyle: const TextStyle(
@@ -29,8 +31,8 @@ class SearchField extends StatelessWidget {
             height: 20,
             width: 20,
             child: IconButton(
+              onPressed: (){},
                 padding: const EdgeInsets.all(0),
-                onPressed: (){},
                 icon: const Icon(Icons.search_outlined)),
           ),
           contentPadding: const EdgeInsets.only(top: 15,bottom: 15)

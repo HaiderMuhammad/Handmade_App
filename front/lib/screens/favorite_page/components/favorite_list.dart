@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:front/models/Favorite.dart';
-import 'package:front/screens/wishlist_page/components/body1.dart';
 import 'package:get/get.dart';
+
+import 'body1.dart';
 
 class FavorList extends StatelessWidget {
   FavorList({Key? key}) : super(key: key);

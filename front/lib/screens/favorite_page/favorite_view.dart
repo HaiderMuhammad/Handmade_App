@@ -14,7 +14,7 @@ class FavoriteView extends StatefulWidget {
 class _FavoriteViewState extends State<FavoriteView> {
 
   late List<FavoriteModel>? favModel = [];
-  ApiServices api2 = ApiServices();
+  ApiServices api = ApiServices();
 
   @override
   void initState() {
@@ -67,8 +67,18 @@ class _FavoriteViewState extends State<FavoriteView> {
                                   style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
-                                      height: 2.5
+                                      height: 0.1
                                   ),
+                                ),
+                                IconButton(
+                                    onPressed: (){
+                                      setState(() {
+                                        api.DeleteFavCart(favModel![index].id);
+                                      });
+                                    },
+                                    padding: const EdgeInsets.only(top: 20),
+                                    icon: const Icon(Icons.delete_forever,
+                                      color: Color(0xff939393),)
                                 ),
                               ],
                             ),
@@ -81,6 +91,7 @@ class _FavoriteViewState extends State<FavoriteView> {
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                     color: Color(0xff67C4A7),
+
 
                                   ),
                                 ),

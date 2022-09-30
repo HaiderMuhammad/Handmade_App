@@ -1,15 +1,12 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:front/api_call/product_api/api_methods.dart';
+import 'package:front/network_model/profile.dart';
 import 'package:front/screens/profile/profile_fields.dart';
 
-class Profile extends StatefulWidget {
-  Profile({Key? key}) : super(key: key);
-
-  @override
-  State<Profile> createState() => _ProfileState();
-}
-
-class _ProfileState extends State<Profile> {
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,12 +50,8 @@ class _ProfileState extends State<Profile> {
                   ],
                 )
             ),
-            const ContainerField(text: 'First Name', hint: 'first name',),
-            const ContainerField(text: 'Last Name', hint: 'last name',),
-            const ContainerField(text: 'Email', hint: 'Email',),
-            const ContainerField(text: 'Phone Number', hint: 'phone number',),
-            const ContainerField(text: 'Address', hint: 'address',),
-            const ContainerField(text: 'Password', hint: 'password',),
+
+            const ContainerField(),
 
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),

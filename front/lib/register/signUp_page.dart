@@ -1,6 +1,8 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:front/api_call/product_api/api_methods.dart';
+import 'package:front/navBar.dart';
 import 'package:front/register/email_field.dart';
 import 'package:front/screens/home_page/home.dart';
 import 'package:front/services/auth_service/auth.dart';
@@ -13,10 +15,13 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String name = '';
+    AuthService auth = AuthService();
+    String userName = '';
     String email = '';
     String password1 = '';
     String password2 = '';
+    String address = '';
+    String phone = '';
 
     return Scaffold(
       body: Padding(
@@ -39,26 +44,29 @@ class SignUp extends StatelessWidget {
                     fontSize: 30, color: const Color(0xff67C4A7), height: 1.3),
               ),
 
-              EmailField(hint: 'name', onChanged: (value) => name = value),
-              EmailField(hint: 'email', onChanged: (value) => email = value),
-              EmailField(hint: 'password1', onChanged: (value) => password1 = value),
-              EmailField(hint: 'password2', onChanged: (value) => password2 = value),
+              EmailField(hint: 'Name', onChanged: (value) => userName = value),
+              EmailField(hint: 'Email', onChanged: (value) => email = value),
+              EmailField(hint: 'Password', onChanged: (value) => password1 = value),
+              EmailField(hint: 'Conform password', onChanged: (value) => password2 = value),
+              EmailField(hint: 'Phone number', onChanged: (value) => phone = value),
+              EmailField(hint: 'Address', onChanged: (value) => address = value),
 
               Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10, top: 50),
                   child: MaterialButton(
                     onPressed: () async{
 
-                      // await AuthService.signUp(
-                      //   name: name,
-                      //   email: email,
-                      //   password1: password1,
-                      //   password2: password2
-                      //
-                      // );
+                      await signUp(
+                          name: userName,
+                          email: email,
+                          password1: password1,
+                          password2: password2,
+                          phone: phone,
+                          address: address
+                      );
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const HomePage()),
+                        MaterialPageRoute(builder: (context) => NavBar()),
                       );
                     },
                     height: 65,
@@ -76,41 +84,6 @@ class SignUp extends StatelessWidget {
                     ),
                   )
               ),
-              Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 30),
-                  child: MaterialButton(
-                    onPressed: (){},
-                    height: 65,
-                    minWidth: double.infinity,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        side: const BorderSide(color: Colors.grey)
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(right: 5),
-                          width: 28,
-                          height: 28,
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage('assets/images/google.png')
-                              )
-                          ),
-                        ),
-                        const Text("Login with Google",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12
-                            )
-                        ),
-                      ],
-                    ),
-                  )
-              ),
-
             ],
           ),
         ),
