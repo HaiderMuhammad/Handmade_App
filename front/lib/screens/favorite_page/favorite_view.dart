@@ -73,7 +73,7 @@ class _FavoriteViewState extends State<FavoriteView> {
                                 IconButton(
                                     onPressed: (){
                                       setState(() {
-                                        api.DeleteFavCart(favModel![index].id);
+                                        api.DeleteFav(favModel![index].id);
                                       });
                                     },
                                     padding: const EdgeInsets.only(top: 20),

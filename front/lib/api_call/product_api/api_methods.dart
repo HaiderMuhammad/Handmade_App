@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 
 
 class ApiServices {
-  String token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJleHAiOjE2Njk3NDU1MzIsInN1YiI6ImFjY2VzcyJ9.MWNn5LKWv14uj82xS3ql39xWxW2VHIP_oMRA4jx6rbU';
+  String token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJleHAiOjE2Njk3NTkxNjUsInN1YiI6ImFjY2VzcyJ9.hQizTKjBK1H39qf5I8j64tsPLJjbUQkcylqr41TpV4A';
   Future<List<ProductsModel>?> getProducts() async {
     try {
       debugPrint('this is body start');
@@ -93,7 +93,7 @@ class ApiServices {
 
   Future<List<FavoriteModel>?> getFav() async {
     try {
-      debugPrint('this is Cart');
+      debugPrint('this is Favorite');
       var url = Uri.parse('http://192.168.1.105:8000/api/wishlists/all');
       var response = await http.get(url, headers: {
         "Content-Type": "application/json",
@@ -118,7 +118,44 @@ class ApiServices {
     return null;
   }
 
-  Future AddToCart(String idItem) async{
+  Future AddToFav(idItem) async{
+    var headers = {
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer $token',
+    };
+    var request = http.Request('POST', Uri.parse('http://192.168.1.105:8000/api/wishlists/add?product_id=$idItem'));
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    }
+    else {
+      print(response.reasonPhrase);
+    }
+  }
+
+  Future DeleteFav(idItem) async {
+    var headers = {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json'
+    };
+    var request = http.Request('DELETE', Uri.parse('http://192.168.1.105:8000/api/wishlists/remove?product_id=$idItem'));
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    }
+    else {
+      print(response.reasonPhrase);
+    }
+  }
+
+
+  Future AddToCart(idItem) async{
     var headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
@@ -140,28 +177,7 @@ class ApiServices {
     }
   }
 
-  Future AddToFav(String idItem) async{
-    var headers = {
-      "Content-Type": "application/json",
-      'Authorization': 'Bearer $token',
-    };
-    var request = http.Request('POST', Uri.parse('http://192.168.1.105:8000/api/wishlists/add?product_id='));
-    request.body = json.encode({
-      "product_id": idItem,
-    });
-    request.headers.addAll(headers);
-
-    http.StreamedResponse response = await request.send();
-
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-    }
-    else {
-      print(response.reasonPhrase);
-    }
-  }
-
-  IncreaseItem(idItem) async {
+  Future IncreaseItem(idItem) async {
     http.Response response;
     try {
       var url = Uri.parse('http://192.168.1.105:8000/api/carts/item/change-qty/$idItem');
@@ -170,7 +186,7 @@ class ApiServices {
             "Content-Type": "application/json",
             'Authorization': 'Bearer $token',
           }
-          );
+      );
       getCart();
 
     } catch (error) {
@@ -178,7 +194,7 @@ class ApiServices {
     }
   }
 
-  ReduceItem(idItem) async {
+  Future ReduceItem(idItem) async {
     http.Response response;
     try {
       var url = Uri.parse('http://192.168.1.105:8000/api/carts/item/reduce/$idItem');
@@ -195,28 +211,10 @@ class ApiServices {
     }
   }
 
-  DeleteCart(idItem) async {
+  Future DeleteCart(idItem) async {
     http.Response response;
     try {
       var url = Uri.parse('http://192.168.1.105:8000/api/carts/item/delete/$idItem');
-      response = await http.delete(url,
-          headers: {
-            "Content-Type": "application/json",
-            'Authorization': 'Bearer $token',
-          }
-      );
-      getCart();
-      debugPrint("recode${response.statusCode}");
-
-    } catch (error) {
-      print(error.toString());
-    }
-  }
-
-  DeleteFavCart(idItem) async {
-    http.Response response;
-    try {
-      var url = Uri.parse('http://192.168.1.105:8000/api/wishlists/remove/$idItem');
       response = await http.delete(url,
           headers: {
             "Content-Type": "application/json",

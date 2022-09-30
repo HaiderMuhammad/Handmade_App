@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 
-class ProductName extends StatelessWidget {
-  const ProductName({
-    Key? key, required this.name,
-  }) : super(key: key);
+class LikeButton extends StatefulWidget {
+  const LikeButton({Key? key, required this.test}) : super(key: key);
 
-  final String name;
+  final String test;
+
+  @override
+  State<LikeButton> createState() => _LikeButtonState();
+}
+
+class _LikeButtonState extends State<LikeButton> {
+
+  bool isLike = false;
   @override
   Widget build(BuildContext context) {
-    return Text(
-      name,
-      style: const TextStyle(
-          fontWeight: FontWeight.normal,
-          fontSize: 15,
-          color: Colors.black87
-      ),
-
-    );
+    return IconButton(
+      padding: const EdgeInsets.only(top: 20),
+      color: isLike ? Colors.redAccent
+          : Colors.grey,
+      icon: const Icon(Icons.favorite_rounded, size: 25,),
+      onPressed: (){
+        isLike = isLike;
+        // api.AddToFav(id);
+      },
+    );;
   }
 }

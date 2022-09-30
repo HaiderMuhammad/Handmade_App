@@ -25,8 +25,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        toolbarHeight: 15,
-
+        toolbarHeight: 12,
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20,right: 20, top: 15),
