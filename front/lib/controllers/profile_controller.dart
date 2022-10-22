@@ -1,7 +1,6 @@
 
 
 import 'package:front/api_call/product_api/api_methods.dart';
-import 'package:front/network_model/all_carts.dart';
 import 'package:front/network_model/profile.dart';
 import 'package:get/get.dart';
 

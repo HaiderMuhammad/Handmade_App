@@ -18,31 +18,17 @@ class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
   ApiServices api = ApiServices();
-  String search = '';
   SearchController searchController = Get.find<SearchController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        toolbarHeight: 12,
-      ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20,right: 20, top: 15),
         child: ListView(
           children: [
             const Address(),
             SearchField(controller: searchController.controller),
-            MaterialButton(
-              onPressed: (){
-                searchController.searchProducts();
-                Get.to(()=> const SearchPage());
-              },
-              color: Colors.black87,
-              child: const Text('search', style: TextStyle(color: Colors.white),),
-
-            ),
 
             const Offers(),
 
@@ -57,7 +43,6 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 10),
               margin: const EdgeInsets.only(bottom: 16),
               decoration: const BoxDecoration(
-                // border: BorderDirectional(bottom: BorderSide(width: 1,color: Color(0xffC8C8CB))),
               ),
               child: Padding(
                 padding: const EdgeInsets.only(top: 6),
@@ -77,7 +62,6 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 10),
               margin: const EdgeInsets.only(bottom: 16),
               decoration: const BoxDecoration(
-                // border: BorderDirectional(bottom: BorderSide(width: 1,color: Color(0xffC8C8CB))),
               ),
               child: Padding(
                 padding: const EdgeInsets.only(top: 6),

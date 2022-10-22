@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:front/api_call/constants.dart';
 import 'package:front/api_call/product_api/api_methods.dart';
 import 'package:front/binding/all_binding.dart';
 import 'package:front/navBar.dart';
@@ -9,16 +10,15 @@ import 'package:front/network_model/all_favorite.dart';
 import 'package:front/network_model/all_products.dart';
 import 'package:front/network_model/profile.dart';
 import 'package:front/register/login_page.dart';
+import 'package:front/services/auth_service/auth.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'screens/home_page/home.dart';
-import 'services/local_database/shared_preferences.dart';
+
 
 Future<void> main() async{
 
   WidgetsFlutterBinding.ensureInitialized();
-  Database.prefs = await SharedPreferences.getInstance();
   runApp(const MyApp());
 }
 
@@ -35,11 +35,13 @@ class _MyAppState extends State<MyApp> {
   late List<CartsModel>? cartModel = [];
   late List<ProfileModel>? profileModel = [];
   late List<FavoriteModel>? favoriteModel = [];
+
   @override
   void initState() {
     super.initState();
     _getData();
   }
+
 
   void _getData() async {
     productModel = (await ApiServices().getProducts());
@@ -74,14 +76,14 @@ class _MyAppState extends State<MyApp> {
           )
 
       ),
-      home: const MyHomePage(),
+      home: MyHomePage(),
     );
   }
 }
 
+String finalToken = '';
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
+  MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -89,17 +91,21 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  Future getToken() async{
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    var token = pref.getString('token');
+    setState(() {
+      finalToken = token!;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 2),
-            ()=>Navigator.pushReplacement(context,
-            MaterialPageRoute(builder:
-                (context) =>
-                    NavBar(),
-            )
-        )
-    );
+    getToken().whenComplete(() async{
+      Timer(const Duration(seconds: 2),() => Get.to(()=> finalToken.isEmpty ? LoginPage() : NavBar())
+      );
+    });
   }
   @override
   Widget build(BuildContext context) {

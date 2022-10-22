@@ -69,7 +69,7 @@ class _ProductViewState extends State<ProductView> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(6.0),
-              child: Image.network("$baseUrl${productModel![index].image![0].image}",
+              child: Image.network("$baseUrl${productModel![index].image!.first.image}",
                 fit: BoxFit.cover,
                 height: 123,
               ),

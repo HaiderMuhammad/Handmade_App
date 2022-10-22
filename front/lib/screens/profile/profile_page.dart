@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:front/screens/profile/profile_view.dart';
+
+
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -9,7 +10,11 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: buildAppBar(),
-      body: const ProfileView(),
+      body: Column(
+        children: const [
+          // ProfileView(),
+        ],
+      )
     );
   }
 

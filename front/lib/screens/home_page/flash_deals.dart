@@ -47,7 +47,7 @@ class _FlashDealViewState extends State<FlashDealView> {
                             productName: productModel![index].name.toString(),
                             price: productModel![index].price.toString(),
                             description: productModel![index].description.toString(),
-                            image: "http://192.168.1.125:8000${productModel![index].image![0].image}",
+                            image: "http://192.168.1.125:8000${productModel![index].image!.first.image}",
                           )
                       )
                   );

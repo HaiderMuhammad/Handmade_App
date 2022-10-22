@@ -26,8 +26,13 @@ class SearchController extends GetxController{
   }
 
   void searchProducts() async{
-    List<ProductsModel>? products = await api.getProducts(search: controller.text);
-    searchList.value = products?? [];
-    print(products!.length.toString());
+    if(controller.text.isEmpty){
+      return;
+    }
+    else{
+      List<ProductsModel>? products = await api.getProducts(search: controller.text);
+      searchList.value = products?? [];
+      // print(products?.length.toString());
+    }
   }
 }

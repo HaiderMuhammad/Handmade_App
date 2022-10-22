@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:front/api_call/product_api/api_methods.dart';
+import 'package:front/controllers/search_controller.dart';
+import 'package:front/screens/search_page/search_page.dart';
+import 'package:get/get.dart';
 
 class SearchField extends StatelessWidget {
   SearchField({
@@ -8,6 +11,7 @@ class SearchField extends StatelessWidget {
 
   ApiServices api = ApiServices();
   final TextEditingController controller;
+  SearchController searchController = Get.find<SearchController>();
 
 
   @override
@@ -17,6 +21,15 @@ class SearchField extends StatelessWidget {
         children: [
           TextField(
             controller: controller,
+        onSubmitted: (_){
+          if(searchController.controller.text.isEmpty){
+            return;
+          }
+          else{
+            searchController.searchProducts();
+            Get.to(()=> const SearchPage());
+          }
+        },
         decoration: InputDecoration(
             hintText: 'Search here ...',
             hintStyle: const TextStyle(
