@@ -1,18 +1,18 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:front/api_call/product_api/api_methods.dart';
+import 'package:front/binding/all_binding.dart';
 import 'package:front/navBar.dart';
 import 'package:front/network_model/all_carts.dart';
+import 'package:front/network_model/all_favorite.dart';
 import 'package:front/network_model/all_products.dart';
 import 'package:front/network_model/profile.dart';
 import 'package:front/register/login_page.dart';
-import 'package:front/screens/home_page/home.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'screens/home_page/home.dart';
 import 'services/local_database/shared_preferences.dart';
 
 Future<void> main() async{
@@ -34,6 +34,7 @@ class _MyAppState extends State<MyApp> {
   late List<ProductsModel>? productModel = [];
   late List<CartsModel>? cartModel = [];
   late List<ProfileModel>? profileModel = [];
+  late List<FavoriteModel>? favoriteModel = [];
   @override
   void initState() {
     super.initState();
@@ -50,10 +51,14 @@ class _MyAppState extends State<MyApp> {
     profileModel = (await ApiServices().getProfile());
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
 
+    favoriteModel = (await ApiServices().getFav());
+    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+
   }
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      initialBinding: AppBindings(),
       debugShowCheckedModeBanner: false,
       title: 'Handmade App',
       theme: ThemeData(
@@ -91,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ()=>Navigator.pushReplacement(context,
             MaterialPageRoute(builder:
                 (context) =>
-                NavBar()
+                    NavBar(),
             )
         )
     );

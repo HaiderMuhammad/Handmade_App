@@ -3,6 +3,7 @@ import 'package:front/nav_bar_controller.dart';
 import 'package:front/screens/cart_page/cart_page.dart';
 import 'package:front/screens/home_page/home.dart';
 import 'package:front/screens/profile/profile_page.dart';
+import 'package:front/screens/profile/profile_view.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:get/get.dart';
 import 'screens/favorite_page/wishlist_page.dart';
@@ -14,7 +15,7 @@ class NavBar extends StatelessWidget {
   NavBar({Key? key}) : super(key: key);
 
   final screens = [
-    const HomePage(),
+    HomePage(),
     const FavoritePage(),
     const CartPage(),
     const ProfilePage()

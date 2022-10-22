@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:front/api_call/constants.dart';
 import 'package:front/api_call/product_api/api_methods.dart';
 import 'package:front/network_model/all_products.dart' hide Image;
 import 'package:front/screens/details_page/details.dart';
@@ -49,7 +50,7 @@ class _ProductViewState extends State<ProductView> {
                   productName: productModel![index].name.toString(),
                   price: productModel![index].price.toString(),
                   description: productModel![index].description.toString(),
-                   image: "http://192.168.1.105:8000${productModel![index].image![0].image}"
+                   image: "http://192.168.1.125:8000${productModel![index].image![0].image}"
                 )
             )
         );
@@ -68,7 +69,7 @@ class _ProductViewState extends State<ProductView> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(6.0),
-              child: Image.network("http://192.168.1.105:8000${productModel![index].image![0].image}",
+              child: Image.network("$baseUrl${productModel![index].image![0].image}",
                 fit: BoxFit.cover,
                 height: 123,
               ),

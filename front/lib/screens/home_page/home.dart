@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:front/api_call/product_api/api_methods.dart';
+import 'package:front/controllers/search_controller.dart';
+import 'package:front/models/category.dart';
 import 'package:front/screens/home_page/address.dart';
+import 'package:front/screens/home_page/catergory.dart';
 import 'package:front/screens/home_page/horizontal_scroll.dart';
 import 'package:front/screens/home_page/offers.dart';
 import 'package:front/screens/home_page/product_title.dart';
 import 'package:front/screens/home_page/product_view.dart';
 import 'package:front/screens/home_page/search_field.dart';
-import '../../models/category.dart';
-import 'catergory.dart';
+import 'package:front/screens/search_page/search_page.dart';
+import 'package:get/get.dart';
 import 'flash_deals.dart';
 
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomePage extends StatelessWidget {
+  HomePage({Key? key}) : super(key: key);
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-
-class _HomePageState extends State<HomePage> {
+  ApiServices api = ApiServices();
+  String search = '';
+  SearchController searchController = Get.find<SearchController>();
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +33,16 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           children: [
             const Address(),
+            SearchField(controller: searchController.controller),
+            MaterialButton(
+              onPressed: (){
+                searchController.searchProducts();
+                Get.to(()=> const SearchPage());
+              },
+              color: Colors.black87,
+              child: const Text('search', style: TextStyle(color: Colors.white),),
 
-            const SearchField(),
+            ),
 
             const Offers(),
 
@@ -87,4 +96,5 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
 

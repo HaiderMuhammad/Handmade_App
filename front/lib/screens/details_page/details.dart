@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front/api_call/product_api/api_methods.dart';
+import 'package:front/controllers/add_cart_controller.dart';
+import 'package:front/controllers/add_favorite_controller.dart';
 import 'package:front/screens/details_page/product_color.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +15,8 @@ class DetailsPage extends StatelessWidget {
   final String price;
   final String description;
   final String image;
+  final AddCartController cartController = Get.find<AddCartController>();
+  final AddFavoriteController favoriteController = Get.find<AddFavoriteController>();
 
   final RxBool _isLike = false.obs;
 
@@ -60,7 +64,7 @@ class DetailsPage extends StatelessWidget {
                         icon: const Icon(Icons.favorite_rounded, size: 25,),
                         onPressed: (){
                           _isLike.value = !_isLike.value;
-                          api.AddToFav(id);
+                          favoriteController.addToFavorite(id);
                         },
                       );
                     }
@@ -101,27 +105,27 @@ class DetailsPage extends StatelessWidget {
                               height: 1.8
                           ),
                         ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 30),
-                  child: MaterialButton(
-                    onPressed: () {
-                      api.AddToCart(id);
-                    },
-                    height: 55,
-                    minWidth: double.infinity,
-                    color: const Color(0xff67C4A7),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)
-                    ),
-                    child: const Text("Add to Cart",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20
-                        )
-                    ),
-                  ),
-                ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 10, top: 30),
+                          child: MaterialButton(
+                            onPressed: () {
+                              cartController.addToCart(id);
+                            },
+                            height: 55,
+                            minWidth: double.infinity,
+                            color: const Color(0xff67C4A7),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5)
+                            ),
+                            child: const Text("Add to Cart",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20
+                                )
+                            ),
+                          ),
+                        ),
                       ],
                     )
                   ],

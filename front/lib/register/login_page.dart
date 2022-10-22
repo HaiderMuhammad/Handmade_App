@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front/models/account/signInModel.dart';
 import 'package:front/register/email_field.dart';
 import 'package:front/register/password_field.dart';
 import 'package:front/register/signUp_page.dart';
@@ -6,6 +7,7 @@ import 'package:front/screens/home_page/home.dart';
 import 'package:front/services/auth_service/auth.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class LoginPage extends StatelessWidget {
@@ -35,24 +37,33 @@ class LoginPage extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: Colors.black),
                   ),
                 ),
-                EmailField(hint: 'Email', onChanged: (value) => email= value ,),
+                EmailField(hint: 'Email', onChanged: (value) => email = value ,),
                 PasswordField( hint: 'Password', onChanged: (value) => password= value, isSecure: true,),
 
                 Padding(
                     padding: const EdgeInsets.only(left: 10, right: 10, top: 50),
 
                     child: MaterialButton(
-                          onPressed: () {
+                          onPressed: () async{
                             login(email, password);
+                            // UserAccount? res = await AuthService.signIn(
+                            //     email: email,
+                            //     password: password
+                            // );
+                            // print(res?.email??'failed');
 
-                            if(_formKey.currentState!.validate()){
-                              return;
-                            }
-                            else
-                              {
-                                print('invalid email and password');
-                              }
-                            // print(res?.name??'failed');
+                            // if(_formKey.currentState!.validate()){
+                            //   return;
+                            // }
+                            // else
+                            //   {
+                            //     print('invalid email and password');
+                            //   }
+                            // // print(res?.name??'failed');
+
+                            final SharedPreferences pref = await SharedPreferences.getInstance();
+                            pref.setString('email', email);
+                            login(email, password);
                           },
                           height: 65,
                           minWidth: double.infinity,

@@ -56,14 +56,14 @@ class SignUp extends StatelessWidget {
                   child: MaterialButton(
                     onPressed: () async{
 
-                      await signUp(
-                          name: userName,
-                          email: email,
-                          password1: password1,
-                          password2: password2,
-                          phone: phone,
-                          address: address
-                      );
+                      // await signUp(
+                      //     name: userName,
+                      //     email: email,
+                      //     password1: password1,
+                      //     password2: password2,
+                      //     phone: phone,
+                      //     address: address
+                      // );
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => NavBar()),

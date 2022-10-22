@@ -1,0 +1,3 @@
+class  SignInController extends GetxController{
+  
+}
