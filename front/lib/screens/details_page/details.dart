@@ -58,7 +58,7 @@ class DetailsPage extends StatelessWidget {
 
                     Obx((){
                       return IconButton(
-                        padding: const EdgeInsets.only(top: 20),
+                        padding: const EdgeInsets.only(top: 25),
                         color: _isLike.value ? Colors.redAccent
                             : Colors.grey,
                         icon: const Icon(Icons.favorite_rounded, size: 25,),
@@ -106,7 +106,7 @@ class DetailsPage extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 10, right: 10, top: 30),
+                          padding: const EdgeInsets.only(left: 10, right: 10, top: 60),
                           child: MaterialButton(
                             onPressed: () {
                               cartController.addToCart(id);

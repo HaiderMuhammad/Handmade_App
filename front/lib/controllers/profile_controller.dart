@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class ProfileController extends GetxController{
   ApiServices api = ApiServices();
 
-  RxList<ProfileModel>? profileList = <ProfileModel>[].obs;
+  Rxn<ProfileModel> profileData = Rxn<ProfileModel>();
   @override
   void onInit() {
     getProfile();
@@ -24,7 +24,7 @@ class ProfileController extends GetxController{
   }
 
   void getProfile() async{
-    List<ProfileModel>? profiles = await api.getProfile();
-    profileList?.value = profiles?? [];
+    ProfileModel? profile = await api.getProfile();
+    profileData.value = profile;
   }
 }

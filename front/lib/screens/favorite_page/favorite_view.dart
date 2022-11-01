@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:front/api_call/constants.dart';
 import 'package:front/controllers/favorite_controller.dart';
+import 'package:front/screens/favorite_page/empty_fav_page.dart';
 import 'package:get/get.dart';
 
 
@@ -11,13 +11,15 @@ class FavoriteView extends GetView<FavoriteController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() =>
+        controller.favoriteList.isEmpty ? const EmptyFavPage()
+            :
         ListView.builder(
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             itemCount: controller.favoriteList.length,
             itemBuilder: (context, index){
               return Padding(
-                  padding: const EdgeInsets.only(top: 5, left: 15, right: 15),
+                  padding: const EdgeInsets.only(top: 35, left: 15, right: 15),
                   child: Column(
                     children: [
                       Row(

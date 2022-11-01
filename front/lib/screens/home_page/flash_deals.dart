@@ -6,6 +6,7 @@ import 'package:front/api_call/constants.dart';
 import 'package:front/api_call/product_api/api_methods.dart';
 import 'package:front/network_model/all_products.dart' hide Image;
 import 'package:front/screens/details_page/details.dart';
+import 'package:get/get.dart';
 
 class FlashDealView extends StatefulWidget {
   const FlashDealView({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class _FlashDealViewState extends State<FlashDealView> {
   }
   @override
   Widget build(BuildContext context) {
-    return productModel == null || productModel!.isEmpty
+    return productModel!.isEmpty
     ? const Center(
       child: CupertinoActivityIndicator(),
     )
@@ -40,17 +41,13 @@ class _FlashDealViewState extends State<FlashDealView> {
             itemBuilder: (context, index){
               return GestureDetector(
                 onTap: (){
-                  Navigator.push(context,
-                      MaterialPageRoute(builder:(context) =>
-                          DetailsPage(
-                            id: productModel![index].id.toString(),
-                            productName: productModel![index].name.toString(),
-                            price: productModel![index].price.toString(),
-                            description: productModel![index].description.toString(),
-                            image: "http://192.168.1.125:8000${productModel![index].image!.first.image}",
-                          )
-                      )
-                  );
+                  Get.to(()=> DetailsPage(
+                    id: productModel![index].id.toString(),
+                    productName: productModel![index].name.toString(),
+                    price: productModel![index].price.toString(),
+                    description: productModel![index].description.toString(),
+                    image: "$baseUrl ${productModel![index].image!.first.image}",
+                  ));
                 },
                 child: Container(
                   width: 220,
@@ -67,9 +64,10 @@ class _FlashDealViewState extends State<FlashDealView> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(6),
                         child: Image.network("$baseUrl${productModel![index].image![0].image}",
-                          height: 96,
-                          width: 64,
-                          fit: BoxFit.fitWidth,),
+                          fit: BoxFit.cover,
+                          height: 123,
+                          width: Get.width * 0.2,
+                        ),
                       ),
 
                       Padding(

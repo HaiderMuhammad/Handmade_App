@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:front/api_call/constants.dart';
 import 'package:front/controllers/cart_controller.dart';
 import 'package:get/get.dart';
+import 'empty_cart_page.dart';
 
 
 class CartView extends GetView<CartController> {
@@ -10,13 +11,15 @@ class CartView extends GetView<CartController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() =>
+        controller.cartList.isEmpty? const EmptyCartPage()
+            :
         ListView.builder(
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             itemCount: controller.cartList.length,
             itemBuilder: (context, index){
               return Padding(
-                  padding: const EdgeInsets.only(top: 5, left: 15, right: 15),
+                  padding: const EdgeInsets.only(top: 35, left: 15, right: 15),
                   child: Column(
                     children: [
                       Row(
@@ -83,7 +86,7 @@ class CartView extends GetView<CartController> {
                                           ),
                                         ),
                                         IconButton(
-                                          onPressed: () => controller.increse(controller.cartList[index].id.toString()),
+                                          onPressed: () => controller.increseItem(controller.cartList[index].id.toString()),
                                           icon: const Icon(
                                             Icons.add_circle_outline_outlined,
                                             color: Color(0xff939393),

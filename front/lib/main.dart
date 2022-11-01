@@ -1,23 +1,15 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:front/api_call/constants.dart';
-import 'package:front/api_call/product_api/api_methods.dart';
 import 'package:front/binding/all_binding.dart';
 import 'package:front/navBar.dart';
-import 'package:front/network_model/all_carts.dart';
-import 'package:front/network_model/all_favorite.dart';
-import 'package:front/network_model/all_products.dart';
-import 'package:front/network_model/profile.dart';
 import 'package:front/register/login_page.dart';
-import 'package:front/services/auth_service/auth.dart';
+import 'package:front/register/signUp_page.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-Future<void> main() async{
-
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
@@ -30,33 +22,32 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
-  late List<ProductsModel>? productModel = [];
-  late List<CartsModel>? cartModel = [];
-  late List<ProfileModel>? profileModel = [];
-  late List<FavoriteModel>? favoriteModel = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _getData();
-  }
-
-
-  void _getData() async {
-    productModel = (await ApiServices().getProducts());
-    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
-
-    cartModel = (await ApiServices().getCart());
-    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
-
-    profileModel = (await ApiServices().getProfile());
-    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
-
-    favoriteModel = (await ApiServices().getFav());
-    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
-
-  }
+  // late List<ProductsModel>? productModel = [];
+  // late List<CartsModel>? cartModel = [];
+  // late List<ProfileModel>? profileModel = [];
+  // late List<FavoriteModel>? favoriteModel = [];
+  //
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _getData();
+  // }
+  //
+  //
+  // void _getData() async {
+  //   productModel = (await ApiServices().getProducts());
+  //   Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+  //
+  //   cartModel = (await ApiServices().getCart());
+  //   Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+  //
+  //   profileModel = (await ApiServices().getProfile());
+  //   Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+  //
+  //   favoriteModel = (await ApiServices().getFav());
+  //   Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+  //
+  // }
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -72,26 +63,23 @@ class _MyAppState extends State<MyApp> {
               systemOverlayStyle: SystemUiOverlayStyle(
                 statusBarIconBrightness: Brightness.dark,
                 statusBarColor: Colors.transparent,
-              )
-          )
-
-      ),
-      home: MyHomePage(),
+              ))),
+      home: const MyHomePage(),
     );
   }
 }
 
 String finalToken = '';
+
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-  Future getToken() async{
+  Future getToken() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     var token = pref.getString('token');
     setState(() {
@@ -102,29 +90,20 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    getToken().whenComplete(() async{
-      Timer(const Duration(seconds: 2),() => Get.to(()=> finalToken.isEmpty ? LoginPage() : NavBar())
-      );
+    getToken().whenComplete(() async {
+      Timer(const Duration(seconds: 2),
+          () => Get.to(() => finalToken.isEmpty ? LoginPage() : NavBar()));
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
         color: Colors.white,
         child: Scaffold(
           body: Center(
-            child: Text(
-              'Handmade',
-              style: GoogleFonts.skranji(
-                color: const Color(0xff67C4A7),
-                fontSize: 40,
-                fontWeight: FontWeight.bold,
-              ),
-
-            ),
-          ),
-        )
-    );
+              child: Lottie.asset("assets/images/hi.json",
+                  width: double.infinity, height: 400, repeat: true)),
+        ));
   }
-
 }

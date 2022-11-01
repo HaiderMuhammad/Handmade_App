@@ -5,7 +5,7 @@ import 'package:front/screens/home_page/home.dart';
 import 'package:front/screens/profile/profile_page.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:get/get.dart';
-import 'screens/favorite_page/wishlist_page.dart';
+import 'screens/favorite_page/favorite_page.dart';
 
 
 class NavBar extends StatelessWidget {
@@ -16,7 +16,7 @@ class NavBar extends StatelessWidget {
   final screens = [
     HomePage(),
     const FavoritePage(),
-    const CartPage(),
+    CartPage(),
     const ProfilePage()
   ];
 

@@ -4,6 +4,7 @@ import 'package:front/controllers/cart_controller.dart';
 import 'package:front/controllers/favorite_controller.dart';
 import 'package:front/controllers/profile_controller.dart';
 import 'package:front/controllers/search_controller.dart';
+import 'package:front/controllers/total_price_controller.dart';
 import 'package:get/get.dart';
 
 class AppBindings extends Bindings{
@@ -15,5 +16,6 @@ class AppBindings extends Bindings{
     Get.put<ProfileController>(ProfileController());
     Get.put<AddFavoriteController>(AddFavoriteController());
     Get.put<SearchController>(SearchController());
+    Get.put<TotalPriceController>(TotalPriceController());
   }
 }

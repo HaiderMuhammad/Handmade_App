@@ -39,13 +39,14 @@ dependencies:
   dio: ^4.0.6
   get: any
   shared_preferences: ^2.0.15
-  flutter_slidable: ^2.0.0
-  flutter_facebook_auth: any
-  image_picker: ^0.8.5+3
   http: ^0.13.5
   modal_progress_hud_nsn: ^0.3.0
-  like_button: ^2.0.5
   flutter_screenutil: ^5.5.4
+  lottie: any
+  image_picker: ^0.8.6
+  path_provider: ^2.0.11
+  path: any
+  permission_handler: ^10.2.0
 
 
 dev_dependencies:
@@ -71,8 +72,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    - assets/images/icon/
-    - assets/images/tshirt.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:

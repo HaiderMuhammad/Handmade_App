@@ -32,7 +32,7 @@ class CartController extends GetxController{
    await api.reduceItem(idItem);
    getCarts();
   }
-  void increse( String idItem) async {
+  void increseItem( String idItem) async {
     await api.increaseItem(idItem);
     getCarts();
   }
@@ -40,5 +40,9 @@ class CartController extends GetxController{
   void deleteCart(String idItem) async {
     await api.deleteCart(idItem);
     getCarts();
+  }
+
+  void totalPrice() async {
+
   }
 }
