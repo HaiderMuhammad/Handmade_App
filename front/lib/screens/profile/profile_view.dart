@@ -15,7 +15,7 @@ class ProfileView extends GetView<ProfileController> {
     return controller.profileData.value == null
         ? const SizedBox.shrink()
         : Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
             child: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -24,8 +24,7 @@ class ProfileView extends GetView<ProfileController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        controller.profileData.value!.first_name![0].toUpperCase().toString() +
-                            controller.profileData.value!.first_name!.substring(1).toString(),
+                        controller.profileData.value!.first_name!.capitalize.toString(),
                         style: GoogleFonts.roboto(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
@@ -34,8 +33,7 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                       const SizedBox(width: 7,),
                       Text(
-                        controller.profileData.value!.last_name![0].toUpperCase().toString() +
-                            controller.profileData.value!.last_name!.substring(1).toString(),
+                        controller.profileData.value!.last_name!.capitalize.toString(),
                         style: GoogleFonts.roboto(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
@@ -44,7 +42,7 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 40,),
+                  const SizedBox(height: 80,),
                   const CustomDivider(text: 'ACCOUNT',),
                   ProfileField(
                     text: controller.profileData.value!.email.toString(),

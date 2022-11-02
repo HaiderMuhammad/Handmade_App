@@ -61,13 +61,13 @@ class SignUpPage extends StatelessWidget {
               PasswordField(
                 hint: 'Password',
                 onChanged: (value) => password1 = value,
-                isSecure: true,
+                isSecure: false,
               ),
               PasswordField(
                 hint: 'Conform password',
                 onChanged: (value) => password2 = value,
                 confirmPassword: password1,
-                isSecure: true,
+                isSecure: false,
               ),
               PhoneField(
                   hint: 'Phone number',
