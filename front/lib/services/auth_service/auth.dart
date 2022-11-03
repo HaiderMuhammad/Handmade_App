@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:front/api_call/constants.dart';
 import 'package:front/models/account/signInModel.dart';
 import 'package:front/navBar.dart';
+import 'package:front/register/login_page.dart';
 import 'package:front/screens/home_page/home.dart';
 import 'package:front/services/local_database/shared_preferences.dart';
 import 'package:get/get.dart' hide Response;
@@ -91,9 +92,16 @@ Future signUp(
           "address": address
       })
     );
-    Get.to(()=> NavBar());
-    print(response);
-    print(response.body);
+    if(response.statusCode == 200){
+      var responseBody = jsonDecode(response.body)['token'];
+      Get.to(()=> NavBar());
+      var token = responseBody["access_token"];
+      print(token);
+      Database.saveToken(token);
+    }
+    else{
+      print('invalid');
+    }
   } catch (error) {
     print(error.toString());
   }
@@ -129,53 +137,13 @@ Future login(
     print(error.toString());
   }
 }
-// Future<UserAccount?> login(String email, String password) async{
-//  var headers = {
-//    'Content-Type': 'application/json'
-//  };
-//  var request = http.Request('POST', Uri.parse('$baseUrl/api/auth/signin'));
-//  request.body = json.encode({
-//   "email": email,
-//   "password": password
-//  });
-//  request.headers.addAll(headers);
-//
-//  http.StreamedResponse response = await request.send();
-//
-//  if (response.statusCode == 200) {
-//   Get.to(() => NavBar());
-//  }
-//  else {
-//   print(response.reasonPhrase);
-//  }
-//  return null;
-//
-// }
 
+Future signOut() async{
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  pref.remove('token');
+  Get.offAll(()=> LoginPage());
+}
 
-// void login2({required String email, required String password}) async{
-//   if( email.isEmpty && password.isEmpty){
-//     var response = await http.post(Uri.parse('http://192.168.1.125:8000/api/auth/signin'),
-//         body: ({
-//           "email": email,
-//           "password": password
-//         })
-//     );
-//     if(response.statusCode == 200){
-//       final body = jsonDecode(response.body);
-//       print("Login Token" + body["token"]);
-//
-//       SharedPreferences pref = await SharedPreferences.getInstance();
-//       await pref .setString('login', body['token']);
-//       Get.to(() => NavBar());
-//     }
-//     else{
-//       print("Invalid");
-//     }
-//   }else{
-//     print(' Blank value found');
-//   }
-// }
 
 
 

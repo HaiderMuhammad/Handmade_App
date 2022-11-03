@@ -11,7 +11,7 @@ class CartView extends GetView<CartController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() =>
-        controller.cartList.isEmpty? const EmptyCartPage()
+        controller.cartList.isEmpty ? const EmptyCartPage()
             :
         ListView.builder(
             scrollDirection: Axis.vertical,

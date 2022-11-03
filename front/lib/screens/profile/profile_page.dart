@@ -76,13 +76,13 @@ class _ProfilePageState extends State<ProfilePage> {
         width: 90,
         height: 90,
         child: CircleAvatar(
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.blueAccent,
           child: Center(
             child: IconButton(
                 onPressed: () => showModalBottomSheet(
                     context: context, builder: (builder) => alertButton()),
                 icon: const Icon(
-                  Icons.add,
+                  CupertinoIcons.person_add,
                   color: Colors.white,
                   size: 30,
                 )
@@ -130,7 +130,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   )),
               Container(
                 width: 2,
-                height: 30,
+                height: 35,
                 margin: const EdgeInsets.only(left: 25, right: 25),
                 color: Colors.black,
               ),

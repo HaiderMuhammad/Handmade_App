@@ -92,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     getToken().whenComplete(() async {
       Timer(const Duration(seconds: 2),
-          () => Get.to(() => finalToken.isEmpty ? LoginPage() : NavBar()));
+          () => Get.to(() => finalToken.isEmpty ? SignUpPage() : NavBar()));
     });
   }
 

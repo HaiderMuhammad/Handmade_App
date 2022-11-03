@@ -34,20 +34,20 @@ class PasswordField extends StatelessWidget {
             hintText: hint,
             hintStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: Colors.grey),
           ),
-          validator: (String? value) {
-            if(value == null){
-              return 'this field required';
-            }
-            if (value.length < 6) {
-              return 'Password must be at least 6 char';
-            }
-            if(confirmPassword != null) {
-              print(confirmPassword);
-              print(value);
-              return 'not match';
-            }
-            return null;
-          },
+          // validator: (String? value) {
+          //   if(value == null){
+          //     return 'this field required';
+          //   }
+          //   if (value.length < 6) {
+          //     return 'Password must be at least 6 char';
+          //   }
+          //   if(confirmPassword != null) {
+          //     print(confirmPassword);
+          //     print(value);
+          //     return 'not match';
+          //   }
+          //   return null;
+          // },
         )
     );
   }

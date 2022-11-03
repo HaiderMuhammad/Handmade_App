@@ -10,13 +10,9 @@ class CartPage extends StatelessWidget {
   final CartController cartController = Get.find<CartController>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.white,
-      body:  Column(
-        children: const [
-          CartView(),
-        ],
-      )
+      body:  CartView(),
     );
   }
 }

@@ -80,7 +80,6 @@ class SignUpPage extends StatelessWidget {
                       if (_formKey.currentState!.validate()) {
                         await signUp(first_name, last_name, email, password1,
                             password2, phone_number, address);
-                        Get.to(() => LoginPage());
                       } else {
                         print('please enter all fields');
                       }

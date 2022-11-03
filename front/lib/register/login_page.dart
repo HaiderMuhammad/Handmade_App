@@ -56,7 +56,9 @@ class _LoginPageState extends State<LoginPage> {
                     child: MaterialButton(
                       onPressed: () async {
                         if (widget._formKey.currentState!.validate()) {
-                          login(email, password);
+                          setState(() {
+                            login(email, password);
+                          });
                         } else {
                           print('invalid email and password');
                         }
