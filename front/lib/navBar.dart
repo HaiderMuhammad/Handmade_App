@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front/nav_bar_controller.dart';
+import 'package:front/controllers/nav_bar_controller.dart';
 import 'package:front/screens/cart_page/cart_page.dart';
 import 'package:front/screens/home_page/home.dart';
 import 'package:front/screens/profile/profile_page.dart';

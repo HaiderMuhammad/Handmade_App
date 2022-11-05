@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:front/binding/all_binding.dart';
 import 'package:front/navBar.dart';
-import 'package:front/register/login_page.dart';
 import 'package:front/register/signUp_page.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -22,32 +21,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // late List<ProductsModel>? productModel = [];
-  // late List<CartsModel>? cartModel = [];
-  // late List<ProfileModel>? profileModel = [];
-  // late List<FavoriteModel>? favoriteModel = [];
-  //
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _getData();
-  // }
-  //
-  //
-  // void _getData() async {
-  //   productModel = (await ApiServices().getProducts());
-  //   Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
-  //
-  //   cartModel = (await ApiServices().getCart());
-  //   Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
-  //
-  //   profileModel = (await ApiServices().getProfile());
-  //   Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
-  //
-  //   favoriteModel = (await ApiServices().getFav());
-  //   Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
-  //
-  // }
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
